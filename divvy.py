@@ -12,10 +12,22 @@ result = json.loads(data)
 stations = result['stationBeanList']
 print(stations)
 
-count = 0
+# row number at initioation
+row_number = 0
+
+# Young location
 x1 = 41.793414
 y1 = -87.600915
 
-#stores the closest city after each iteration.
-station_number = 0 
+#storing the closest station after each iteration.
+station_number = 0
+for i in stations:
+    x2 = result['stationBeanList'][row_number]['latitude']
+    y2 = result['stationBeanList'][row_number]['longitude']
+
+#
+
+station_number = row_number
+row_number = row_number + 1
+
 
