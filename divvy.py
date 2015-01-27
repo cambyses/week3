@@ -1,33 +1,36 @@
 # Divvy Bikes
-#
-# Here's an example of how to retrieve the list of Divvy bike stations:
 
-import math
-import json
-from urllib.request import urlopen
+def main():
 
-webservice_url = "http://www.divvybikes.com/stations/json"
-data = urlopen(webservice_url).read().decode("utf8")
-result = json.loads(data)
-stations = result['stationBeanList']
-print(stations)
+    import json
+    import math
+    from urllib.request import urlopen
 
-# row number at initioation
-row_number = 0
+    webservice_url = "http://www.divvybikes.com/stations/json"
+    data = urlopen(webservice_url).read().decode("utf8")
+    result = json.loads(data)
+    stations = result['stationBeanList']
 
-# Young location
-x1 = 41.793414
-y1 = -87.600915
+    count = 0
+    dist_min = 100000000000
+    x1 = 41.793414
+    y1 = -87.600915
 
-#storing the closest station after each iteration.
-station_number = 0
-for i in stations:
-    x2 = result['stationBeanList'][row_number]['latitude']
-    y2 = result['stationBeanList'][row_number]['longitude']
+    #stores the closest city after each iteration.
+    station_number = 0 
+    for i in stations:
+            x2 = result['stationBeanList'][count]['latitude']
+            y2 = result['stationBeanList'][count]['longitude']
+            dist = math.pow((x1-x2), 2) + math.pow((y1-y2), 2)
+            if dist < dist_min and dist!= 0:
+                dist_min = dist
+                station_number = count
+                count = count + 1
+                
+    #print results 'stationBeanList' and 'stationName'
+    print("The nearest station is: ",result['stationBeanList'][station_number]['stationName'])
+    print("There are",result['stationBeanList'][station_number]['availableBikes'],"bikes currently avaiable.")
 
-#
-
-station_number = row_number
-row_number = row_number + 1
+main()
 
 
