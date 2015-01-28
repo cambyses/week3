@@ -25,7 +25,7 @@ def main():
             if dist < dist_min and dist!= 0:
                 dist_min = dist
                 station_number = count
-                count = count + 1
+            count = count + 1
                 
     #print results 'stationBeanList' and 'stationName'
     print("The nearest station is: ",result['stationBeanList'][station_number]['stationName'])
